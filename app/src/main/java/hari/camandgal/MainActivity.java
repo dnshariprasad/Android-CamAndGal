@@ -85,22 +85,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void dispatchTakePictureIntent(int requestCode) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = createImageFile();
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                startActivityForResult(takePictureIntent, requestCode);
-            }
+        // Create the File where the photo should go
+        File photoFile = createImageFile();
+        // Continue only if the File was successfully created
+        if (photoFile != null) {
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+            startActivityForResult(takePictureIntent, requestCode);
         }
+
     }
 
     private File createImageFile() {
         // Create an image file name
-        String imageFileName = "eLokers" + System.currentTimeMillis();
-        File storageDir = new File(Environment.getExternalStorageDirectory() + "/" + "ME");
+        String imageFileName = "Me" + System.currentTimeMillis();
+        File storageDir = new File(Environment.getExternalStorageDirectory() + "/" + "Me");
         if (!storageDir.exists())
             storageDir.mkdir();
         File image = null;
